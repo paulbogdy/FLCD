@@ -1,0 +1,115 @@
+Alphabet:
+    - A-Z and a-z letters
+    - Underline char '_'
+    - Decimal Digits (0-9)
+Lexic:
+    - Special symbols:
+        - operators: +, -, *, /, =, <, >, <=, >=, &, |, ^, ==, %, !=
+        - separators: (), [], {}, :, '', \n, space
+        - reserved words: int, char, bool, read, write, if, else, while, for, True, False, mut
+    - Identifiers:
+        - seq of letters and digits such that the first character is a letter:
+            - identifier ::= letter | letter{letter}{digit}
+            - letter ::= "A"|"B"|"C"|..|"Z"|"a"|"b"|..|"z"
+            - digit ::= "0"|"1"|..|"9"
+    - Constants:
+        - Eveything is a constant by default, constants can only be generated on assignment. If one wants a variable, it's gonna have a different declaration
+        - integer:
+            - constint ::= "0"|["+"|"-"]nonzero{digit}
+            - nonzero ::= "1"|..|"9"
+        - character:
+            - constchar ::= 'letter'
+                          | 'digit'
+        - boolean:
+            - constbool ::= True
+                          | False
+Syntax:
+    The words, predefined Tokens are specified between ''
+    <program> ::= "func" "master" "(" ")" "{" <stmtlist> "}"
+    <stmtlist> ::= <stmt>
+                 | <stmt> "\n" <stmtlist>
+    <stmt> ::= <simplestmt>
+             | <structstmt>
+    <simplestmt> ::= <decl>
+                   | <assigndecl>
+                   | <constdecl>
+                   | <assignment>
+                   | <readstmt>
+                   | <writestmt>
+    <readstmt> ::= "read" "(" <expression> ")"
+    <writestmt> ::= "write" "(" <expression> ")"
+    <structstmt> ::= <whilestmt>
+                   | <forstmt>
+                   | <ifstmt>
+    <whilestmt> ::= "while" "(" <logicexpr> ")" "{" <stmtlist> "}"
+    <forstmt> ::= "for" "(" <assigndecl> "," <logicexpr> "," <assignment> ")" "{" <stmtlist> "}"
+    <ifstmt> ::= "if" "(" <logicexpr> ")" "{" <stmtlist> "}" ["else" <ifstmt> | "else" "{" <stmtlist> "}"]
+    <decl> ::= "mut" <identifier> ":" (<type> | <array>)
+    <assigndecl> ::= "mut" <constdecl>
+    <constdecl> ::= <identifier> ":" <type> "=" <expression>
+    <assignment> ::= <identifer> "=" <expression>
+    <expression> ::= <logicexpr>
+                   | <arithexpr>
+    <logicexpr> ::= <identifer>
+                  | <constbool>
+                  | <logicexpr> "&" <logicexpr>
+                  | <logicexpr> "|" <logicexpr>
+                  | <logicexpr> "^" <logicexpr>
+                  | <arithexpr> "<" <arithexpr>
+                  | <arithexpr> ">" <arithexpr>
+                  | <arithexpr> "==" <arithexpr>
+                  | <arithexpr> "<=" <arithexpr>
+                  | <arithexpr> ">=" <arithexpr>
+                  | <expression> "!=" <expression>
+    <arithexpr> ::= <identifer>
+                  | <constint>
+                  | <constchar>
+                  | <arithexpr> "+" <arithexpr>
+                  | <arithexpr> "-" <arithexpr>
+                  | <arithexpr> "*" <arithexpr>
+                  | <arithexpr> "/" <arithexpr>
+                  | <arithexpr> "%" <arithexpr>
+    <accessarray> ::= <identifer> "[" <arithexpr> "]"
+    <array> ::= <type> "[" <constint> "]"
+    <type> ::= "bool"
+            |  "int"
+            |  "char"
+Tokens:
++
+-
+*
+/
+=
+<
+>
+<=
+>=
+&
+|
+^
+==
+!=
+%
+\n
+(
+)
+[
+]
+{
+}
+:
+''
+\n
+space
+int
+mut
+char
+bool
+read
+write
+if
+else
+while
+for
+True
+False

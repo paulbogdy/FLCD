@@ -1,0 +1,16 @@
+func gcd(a: int, b: int): int {
+    if(b == 0) {
+        return a 
+    }
+    return gcd(b, a % b)
+}
+
+func master(): None {
+    mut a: int
+    mut b: int
+
+    read(a)
+    read(b)
+    
+    write(gcd(a, b))
+}

@@ -1,0 +1,18 @@
+func master(): None {
+    mut 2a: int
+    mut !b: int
+    mut c: int
+    
+    read(2a)
+    read(!b)
+    read(c)
+
+    if(2a > !b and 2a > c) {
+        wite(2a)
+    } else if(!b > 2a and !b > c) {
+        write(!b)
+    } else {
+        write(c)
+    }
+}
+    
