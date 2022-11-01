@@ -1,4 +1,5 @@
 +
+,
 -
 *
 /
@@ -21,9 +22,6 @@
 {
 }
 :
-''
-\n
-space
 int
 mut
 char
@@ -36,3 +34,6 @@ while
 for
 True
 False
+None
+func
+master

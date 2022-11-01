@@ -1,5 +1,5 @@
 #include "HashMap.h"
-
+#include "PIForm.h"
 
 void TestCommonHashMap(int testsize) {
     // Testing our Use Case HashMap<string, int>
@@ -45,9 +45,39 @@ void TestCommonHashMap(int testsize) {
     cout << "Test Passed\n";
 }
 
+void TestRegex() {
+    cout << "Testing char regex...";
+    assert(regex_match("'a'", PIForm::char_regex));
+    assert(!regex_match("'a", PIForm::char_regex));
+    cout << " Passed\n";
+    
+    cout << "Testing number regex...";
+    assert(regex_match("15", PIForm::number_regex));
+    assert(regex_match("+15", PIForm::number_regex));
+    assert(regex_match("0", PIForm::number_regex));
+    assert(!regex_match("+0", PIForm::number_regex));
+    assert(!regex_match("-0", PIForm::number_regex));
+    assert(!regex_match("10.0", PIForm::number_regex));
+    assert(regex_match("+9", PIForm::number_regex));
+    assert(regex_match("-1885647", PIForm::number_regex));
+    assert(!regex_match("03", PIForm::number_regex));
+    assert(!regex_match("++3", PIForm::number_regex));
+    cout << " Passed\n";
+
+    cout << "Testing identifier regex...";
+    assert(regex_match("number", PIForm::identifier_regex));
+    assert(regex_match("a", PIForm::identifier_regex));
+    assert(regex_match("number25", PIForm::identifier_regex));
+    assert(regex_match("s3x", PIForm::identifier_regex));
+    assert(!regex_match("5ex", PIForm::identifier_regex));
+    assert(!regex_match("", PIForm::identifier_regex));
+    cout << " Passed\n";
+}
+
 int main() {
     TestCommonHashMap(4);
     TestCommonHashMap(69);
     TestCommonHashMap(42069);
     TestCommonHashMap(69420);
+    TestRegex();
 }

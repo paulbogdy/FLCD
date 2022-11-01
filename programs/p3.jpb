@@ -2,18 +2,21 @@ func master() {
     mut n: int
     read(n)
     
-    elems: List<int>
+    elems: elems[1000]
+
+    mut nr: int = 0
 
     while(n > 1) {
-        elems.insert(n)
+        elems[nr] = n
         if(n % 2 == 1) {
             n = n*3 + 1
         }
         else {
             n = n/2
         }
+        nr = nr+1
     }
-    for(elem: elems) {
-        write(elem)
+    for(mut i: int = 0, i < n, i = i+1) {
+        write(elems[i])
     }
 }
