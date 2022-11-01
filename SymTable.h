@@ -9,6 +9,9 @@ public:
         _map.insert(id, ++_next_code);
         return _next_code;
     }
+    vector<pair<string, size_t>> elems() {
+        return _map.elems();
+    }
     optional<size_t> search(const string &id) {
         return _map.search(id); 
     }

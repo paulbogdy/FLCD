@@ -18,7 +18,7 @@ public:
     Scanner(string file_path){
         string staticToken;
         ifstream program(file_path);
-        int nr = 0;
+        int nr = 1;
         if (program.is_open())
         {
             while (getline (program, staticToken))
@@ -26,16 +26,12 @@ public:
                 _staticTokens.insert(staticToken, ++nr);
             }
         }
-        cout << "Created\n";
     }
     optional<pair<int, string>> create_pif(string file_path) {
         _tokenizer.tokenize(file_path);
-        cout << "Tokenized\n";
         for(const pair<string, int> &token: _tokenizer.tokens()) {
-            cout << token.first << " | Line: " << token.second << '\n';
             try {
                 auto elem = add_token(token.first);
-                cout << elem.first << ' ' << elem.second << '\n';
                 _pif.insert(elem);
             } catch (runtime_error &e) {
                 return make_pair(token.second, e.what());
@@ -45,6 +41,12 @@ public:
     }
     const PIForm &get_pif() {
         return _pif;
+    }
+    SymTable &constants() {
+        return _constants;
+    }
+    SymTable &identifiers() {
+        return _identifiers;
     }
 private:
     pair<int, int> add_token(const string &token) {
@@ -87,9 +89,32 @@ int main() {
     if(error.has_value()) {
         cout << "Issue at line " << error.value().first << " | " << error.value().second << '\n';
     } else {
-        auto pif = scanner.get_pif();
-        for (PIForm::Iterator it = pif.begin(); it != pif.end(); it++) {
-            cout << (*it).first << ' ' << (*it).second << '\n';
+        cout << "No Lexical Errors\n";
+        ofstream symtablefile;
+        symtablefile.open("ST.out");
+        
+        symtablefile << "Constants\n";
+        for(auto elem: scanner.constants().elems()) {
+            symtablefile << elem.first << '|' << elem.second << '\n';
         }
+
+        symtablefile << "Identifiers\n";
+        for(auto elem: scanner.identifiers().elems()) {
+            symtablefile << elem.first << '|' << elem.second << '\n';
+        }
+
+        symtablefile.close();
+
+
+        ofstream piffile;
+        piffile.open("PIF.out");
+
+        auto pif = scanner.get_pif();
+        for (auto elem: pif) {
+            piffile << elem.first << ' ' << elem.second << '\n';
+        }
+
+        piffile.close();
+
     }
 }

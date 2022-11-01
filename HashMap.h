@@ -93,6 +93,15 @@ public:
             }
         }
     }
+    vector<pair<Key, Value>> elems() {
+        vector<pair<Key, Value>> elems;
+        for(size_t i=0; i<_cap; i++) {
+            if(_nodes[i].status == OCCUPIED) {
+                elems.push_back({_nodes[i].key, _nodes[i].value});
+            }
+        }
+        return elems;
+    }
 private:
     void resize() {
         size_t old_cap = _cap;
