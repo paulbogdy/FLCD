@@ -68,13 +68,13 @@ private:
         throw runtime_error("Lexical Error at token: " + token);
     }
     bool is_constant(const string &token) {
-        if (regex_match(token, PIForm::char_regex)) return true; // Char
-        if (regex_match(token, PIForm::number_regex)) return true; // Number
+        if (PIForm::char_fa.matches(token)) return true; // Char
+        if (PIForm::number_fa.matches(token)) return true; // Number
 
         return false;
     }
     bool is_identifier(const string &token) {
-        return regex_match(token, PIForm::identifier_regex);
+        return PIForm::identifier_fa.matches(token);
     }
     HashMap<string, int> _staticTokens;
     Tokenizer _tokenizer;

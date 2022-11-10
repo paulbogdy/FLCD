@@ -1,5 +1,6 @@
 #include <regex>
 #include <iostream>
+#include "FiniteAutomata.h"
 
 using namespace std;
 
@@ -26,6 +27,9 @@ public:
     inline static const regex char_regex { "'.'" };
     inline static const regex number_regex { "0|([+-]?[1-9][0-9]*)" };
     inline static const regex identifier_regex { "[a-zA-Z][a-zA-Z0-9]*" };
+    inline static FiniteAutomata char_fa { "automatas/char.fa" };
+    inline static FiniteAutomata number_fa { "automatas/number.fa" };
+    inline static FiniteAutomata identifier_fa { "automatas/identifier.fa" };
     PIForm(): _list(nullptr), _tail(nullptr){}
     void insert(pair<int, int> &elem) {
         if(_tail == nullptr) {

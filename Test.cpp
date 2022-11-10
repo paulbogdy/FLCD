@@ -74,10 +74,48 @@ void TestRegex() {
     cout << " Passed\n";
 }
 
+
+void TestFiniteAutomata() {
+
+    cout << "Testing char automata...";
+
+    assert(PIForm::char_fa.matches("'a'"));
+    assert(!PIForm::char_fa.matches("'a"));
+
+    cout << "Pased\n";
+    
+    cout << "Testing number automata...";
+
+    assert(PIForm::number_fa.matches("15"));
+    assert(PIForm::number_fa.matches("+15"));
+    assert(PIForm::number_fa.matches("0"));
+    assert(!PIForm::number_fa.matches("+0"));
+    assert(!PIForm::number_fa.matches("-0"));
+    assert(!PIForm::number_fa.matches("10.0"));
+    assert(PIForm::number_fa.matches("+9"));
+    assert(PIForm::number_fa.matches("-1885647"));
+    assert(!PIForm::number_fa.matches("03"));
+    assert(!PIForm::number_fa.matches("++3"));
+
+    cout << " Passed\n";
+
+    cout << "Testing identifier automata...";
+
+    assert(PIForm::identifier_fa.matches("number"));
+    assert(PIForm::identifier_fa.matches("a"));
+    assert(PIForm::identifier_fa.matches("number25"));
+    assert(PIForm::identifier_fa.matches("s3x"));
+    assert(!PIForm::identifier_fa.matches("5ex"));
+    assert(!PIForm::identifier_fa.matches(""));
+
+    cout << "Passed\n";
+}
+
 int main() {
     TestCommonHashMap(4);
     TestCommonHashMap(69);
     TestCommonHashMap(42069);
     TestCommonHashMap(69420);
     TestRegex();
+    TestFiniteAutomata();
 }
